@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Positionsgrößenrechner</title>
+  
+  <!-- SEO Tags -->
+  <meta name="description" content="Professioneller Positionsgrößenrechner für den Aktienhandel. Ermitteln Sie die perfekte Aktienanzahl und steuern Sie Ihr Risiko. Offline-fähig und optimiert für Android.">
+  <meta name="theme-color" content="#0d1117">
+  
+  <!-- Manifest for Android PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-logo">
+        <svg viewBox="0 0 512 512" width="32" height="32">
+          <use href="icon.svg#bgGrad"></use>
+          <path d="M120,380 L120,240 L160,240 L160,380 Z" fill="#ef4444" />
+          <path d="M220,380 L220,160 L260,160 L260,380 Z" fill="#22c55e" />
+          <path d="M320,380 L320,100 L360,100 L360,380 Z" fill="#22c55e" />
+          <line x1="80" y1="240" x2="420" y2="240" stroke="#ef4444" stroke-width="4" stroke-dasharray="10,10" />
+          <line x1="80" y1="160" x2="420" y2="160" stroke="#38bdf8" stroke-width="6" />
+        </svg>
+        <h1>Positionsrechner</h1>
+      </div>
+      <button id="pwa-install-btn" class="btn btn-secondary install-btn" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+        </svg>
+        Als App installieren
+      </button>
+    </header>
+
+    <main class="app-main">
+      <!-- Input Section -->
+      <section class="calculator-inputs">
+        <div class="card glass">
+          <h2 class="card-title">Parameter</h2>
+          
+          <div class="form-group">
+            <label for="input-depot">Depotwert (€)</label>
+            <div class="input-wrapper">
+              <span class="input-icon">€</span>
+              <input type="text" inputmode="decimal" id="input-depot" placeholder="z.B. 10.000" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="input-risk">Risiko</label>
+              <div class="risk-toggle-container">
+                <button type="button" class="toggle-btn active" id="btn-risk-percent">%</button>
+                <button type="button" class="toggle-btn" id="btn-risk-val">€</button>
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <span class="input-icon" id="risk-icon">%</span>
+              <input type="text" inputmode="decimal" id="input-risk" placeholder="z.B. 1,0" required>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="input-entry">Einstiegspreis (€)</label>
+              <div class="input-wrapper">
+                <span class="input-icon">€</span>
+                <input type="text" inputmode="decimal" id="input-entry" placeholder="z.B. 120,00" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-stop">Stop-Loss (€)</label>
+              <div class="input-wrapper">
+                <span class="input-icon">€</span>
+                <input type="text" inputmode="decimal" id="input-stop" placeholder="z.B. 114,00" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advanced Collapsible Section -->
+          <details class="advanced-settings">
+            <summary class="advanced-summary">Weitere Optionen (Take-Profit & Gebühren)</summary>
+            <div class="advanced-content">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="input-target">Take-Profit (€)</label>
+                  <div class="input-wrapper">
+                    <span class="input-icon">€</span>
+                    <input type="text" inputmode="decimal" id="input-target" placeholder="z.B. 140,00">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-fees">Transaktionsgebühr (€)</label>
+                  <div class="input-wrapper">
+                    <span class="input-icon">€</span>
+                    <input type="text" inputmode="decimal" id="input-fees" placeholder="z.B. 5,00" value="0,00">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Output Section -->
+      <section class="calculator-outputs">
+        <div class="card glass results-card">
+          <h2 class="card-title">Berechnung</h2>
+
+          <div class="primary-result-badge">
+            <span class="badge-label">Empfohlene Aktienanzahl</span>
+            <span class="badge-value" id="out-shares">—</span>
+            <span class="badge-sub" id="out-shares-sub">Bitte füllen Sie alle Parameter aus</span>
+          </div>
+
+          <div class="results-grid">
+            <div class="result-tile">
+              <span class="tile-label">Investitionsvolumen</span>
+              <span class="tile-value" id="out-position">—</span>
+            </div>
+
+            <div class="result-tile">
+              <span class="tile-label">Max. Risiko</span>
+              <span class="tile-value" id="out-max-risk">—</span>
+            </div>
+
+            <div class="result-tile">
+              <span class="tile-label">Risiko je Aktie</span>
+              <span class="tile-value" id="out-risk-per-share">—</span>
+            </div>
+
+            <div class="result-tile">
+              <span class="tile-label">Depot-Anteil</span>
+              <span class="tile-value" id="out-portfolio-share">—</span>
+            </div>
+
+            <div class="result-tile full-width" id="tile-crv-container" style="display: none;">
+              <span class="tile-label">Chance-Risiko-Verhältnis (CRV)</span>
+              <div class="crv-display">
+                <span class="tile-value highlight" id="out-crv">—</span>
+                <span class="crv-rating" id="out-crv-rating"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert-info" id="validation-alert" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+              <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+              <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+            </svg>
+            <span id="validation-msg">Der Stop-Loss muss unter dem Einstiegspreis liegen!</span>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>&copy; 2026 Positionsgrößenrechner. Lokal auf Ihrem Gerät gespeichert.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
