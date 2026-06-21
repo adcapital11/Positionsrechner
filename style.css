@@ -418,6 +418,23 @@ input[type=number] {
   75% { transform: translateX(4px); }
 }
 
+/* Symbol Badge in Header */
+.symbol-badge {
+  display: inline-block;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  margin-left: 10px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   body {

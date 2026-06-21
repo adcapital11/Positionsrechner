@@ -55,6 +55,7 @@ const validationMsg = document.getElementById('validation-msg');
 
 // State
 let riskMode = 'percent'; // 'percent' or 'value'
+let activeSymbol = ''; // Loaded from URL parameters if present
 
 // Initialize event listeners
 btnRiskPercent.addEventListener('click', () => setRiskMode('percent'));
@@ -244,7 +245,8 @@ function calculate() {
 
   // Output Rendering
   outShares.textContent = formatNumber(shares);
-  outSharesSub.textContent = `Kaufe ${shares} Anteile zu je ${formatCurrency(entry)}`;
+  const symbolStr = activeSymbol ? ` von ${activeSymbol}` : '';
+  outSharesSub.textContent = `Kaufe ${shares} Anteile${symbolStr} zu je ${formatCurrency(entry)}`;
   outPosition.textContent = formatCurrency(positionVolume);
   outMaxRisk.textContent = formatCurrency(maxRiskVal);
   outRiskPerShare.textContent = formatCurrency(riskPerShare);
@@ -343,6 +345,17 @@ const params = new URLSearchParams(window.location.search);
 const entryParam = params.get('entry') || params.get('price');
 const stopParam = params.get('stop') || params.get('sl');
 const targetParam = params.get('target') || params.get('tp');
+const symbolParam = params.get('symbol') || params.get('ticker') || params.get('sym');
+
+if (symbolParam) {
+  activeSymbol = symbolParam.toUpperCase();
+  const badge = document.getElementById('symbol-badge');
+  if (badge) {
+    badge.textContent = activeSymbol;
+    badge.style.display = 'inline-block';
+  }
+  document.title = `Positionsrechner - ${activeSymbol}`;
+}
 
 if (entryParam) inputEntry.value = entryParam.replace('.', ',');
 if (stopParam) inputStop.value = stopParam.replace('.', ',');
