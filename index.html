@@ -11,8 +11,8 @@
   
   <!-- Manifest for Android PWA -->
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/svg+xml" href="icon.svg">
-  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="icon" type="image/svg+xml" href="images/Logo_blau.svg">
+  <link rel="apple-touch-icon" href="images/Logo_blau.svg">
   
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,15 +24,8 @@
 <body>
   <div class="app-container">
     <header class="app-header">
-      <div class="header-logo">
-        <svg viewBox="0 0 512 512" width="32" height="32">
-          <use href="icon.svg#bgGrad"></use>
-          <path d="M120,380 L120,240 L160,240 L160,380 Z" fill="#ef4444" />
-          <path d="M220,380 L220,160 L260,160 L260,380 Z" fill="#22c55e" />
-          <path d="M320,380 L320,100 L360,100 L360,380 Z" fill="#22c55e" />
-          <line x1="80" y1="240" x2="420" y2="240" stroke="#ef4444" stroke-width="4" stroke-dasharray="10,10" />
-          <line x1="80" y1="160" x2="420" y2="160" stroke="#38bdf8" stroke-width="6" />
-        </svg>
+      <div class="header-logo logo-area">
+        <img src="images/Logo_white_120px.svg" alt="SEPA Logo" class="logo-img">
         <h1>Positionsrechner<span id="symbol-badge" class="symbol-badge" style="display: none;"></span></h1>
       </div>
       <button id="pwa-install-btn" class="btn btn-secondary install-btn" style="display: none;">
