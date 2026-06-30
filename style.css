@@ -589,6 +589,7 @@ input[type=number] {
     flex: 0 0 100%;
     width: 100%;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
     padding: 0 12px; /* Pad sides to replace container margins */
     box-sizing: border-box;
   }

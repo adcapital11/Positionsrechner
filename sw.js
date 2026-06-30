@@ -1,4 +1,4 @@
-const CACHE_NAME = 'position-size-calc-v2';
+const CACHE_NAME = 'position-size-calc-v4';
 const ASSETS = [
   './',
   './index.html',
