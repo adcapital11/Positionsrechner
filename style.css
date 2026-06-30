@@ -524,20 +524,78 @@ input[type=number] {
   transform: translateY(0);
 }
 
+/* Carousel Dots indicators */
+.carousel-dots {
+  display: none; /* Hidden on Desktop */
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.dot.active {
+  background: var(--accent-color);
+  transform: scale(1.2);
+  box-shadow: 0 0 8px var(--accent-color);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   body {
     padding: 12px;
     align-items: flex-start;
+    overflow-x: hidden; /* Prevent body scrolling horizontally */
+  }
+  
+  .carousel-dots {
+    display: flex;
   }
   
   .app-main {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    display: flex;
+    flex-direction: row;
+    grid-template-columns: none; /* Disable grid */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 0;
+    width: calc(100% + 24px); /* Offset parent padding */
+    margin-left: -12px;
+    padding-bottom: 8px;
+  }
+
+  /* Hide scrollbar for PWA native-feel */
+  .app-main::-webkit-scrollbar {
+    display: none;
+  }
+  .app-main {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .calculator-inputs,
+  .calculator-outputs,
+  .ibkr-card {
+    flex: 0 0 100%;
+    width: 100%;
+    scroll-snap-align: start;
+    padding: 0 12px; /* Pad sides to replace container margins */
+    box-sizing: border-box;
   }
   
   .card {
     padding: 20px;
+    height: auto; /* natural height, avoids stretching on mobile */
   }
   
   .badge-value {

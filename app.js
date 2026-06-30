@@ -378,3 +378,35 @@ if (entryParam || stopParam || targetParam) {
   formatAllFields();
   calculate();
 }
+
+// Carousel dot indicators logic on mobile
+const appMain = document.querySelector('.app-main');
+const dots = document.querySelectorAll('.dot');
+
+if (appMain && dots.length > 0) {
+  appMain.addEventListener('scroll', () => {
+    const width = appMain.clientWidth;
+    if (width === 0) return;
+    const index = Math.round(appMain.scrollLeft / width);
+    
+    dots.forEach((dot, idx) => {
+      if (idx === index) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  });
+
+  // Tap dots to navigate
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.getAttribute('data-index'), 10);
+      const width = appMain.clientWidth;
+      appMain.scrollTo({
+        left: idx * width,
+        behavior: 'smooth'
+      });
+    });
+  });
+}
