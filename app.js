@@ -348,6 +348,10 @@ function loadFromLocalStorage() {
     } catch (e) {
       console.error('Fehler beim Laden aus dem LocalStorage:', e);
     }
+  } else {
+    // Default fallback values
+    inputRisk.value = '1,0';
+    setRiskMode('percent');
   }
 }
 // Initial load
