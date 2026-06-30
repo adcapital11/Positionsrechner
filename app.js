@@ -282,7 +282,6 @@ function calculate() {
   ibkrQty.textContent = formatNumber(shares);
   ibkrStopPrice.textContent = formatNumber(entry, 2);
   ibkrSlPrice.textContent = formatNumber(stop, 2);
-  ibkrHelperCard.style.display = 'flex';
 }
 
 function resetOutputs() {
@@ -294,8 +293,10 @@ function resetOutputs() {
   outPortfolioShare.textContent = '—';
   tileCrvContainer.style.display = 'none';
   
-  // Hide IBKR helper
-  ibkrHelperCard.style.display = 'none';
+  // Reset IBKR helper values instead of hiding
+  ibkrQty.textContent = '—';
+  ibkrStopPrice.textContent = '—';
+  ibkrSlPrice.textContent = '—';
 }
 
 function showError(msg) {
