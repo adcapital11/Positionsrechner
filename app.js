@@ -38,7 +38,6 @@ const inputFees = document.getElementById('input-fees');
 
 const btnRiskPercent = document.getElementById('btn-risk-percent');
 const btnRiskVal = document.getElementById('btn-risk-val');
-const riskIcon = document.getElementById('risk-icon');
 
 const outShares = document.getElementById('out-shares');
 const outSharesSub = document.getElementById('out-shares-sub');
@@ -49,6 +48,12 @@ const outPortfolioShare = document.getElementById('out-portfolio-share');
 const outCrv = document.getElementById('out-crv');
 const outCrvRating = document.getElementById('out-crv-rating');
 const tileCrvContainer = document.getElementById('tile-crv-container');
+
+// IBKR Helper Elements
+const ibkrHelperCard = document.getElementById('ibkr-helper-card');
+const ibkrQty = document.getElementById('ibkr-qty');
+const ibkrStopPrice = document.getElementById('ibkr-stop-price');
+const ibkrSlPrice = document.getElementById('ibkr-sl-price');
 
 const validationAlert = document.getElementById('validation-alert');
 const validationMsg = document.getElementById('validation-msg');
@@ -132,7 +137,6 @@ function setRiskMode(mode) {
   if (mode === 'percent') {
     btnRiskPercent.classList.add('active');
     btnRiskVal.classList.remove('active');
-    riskIcon.textContent = '%';
     inputRisk.placeholder = 'z.B. 1,0';
     // Convert current value roughly
     const val = parseLocaleFloat(inputRisk.value);
@@ -144,7 +148,6 @@ function setRiskMode(mode) {
   } else {
     btnRiskPercent.classList.remove('active');
     btnRiskVal.classList.add('active');
-    riskIcon.textContent = '€';
     inputRisk.placeholder = 'z.B. 100';
     // Convert current value roughly
     const val = parseLocaleFloat(inputRisk.value);
@@ -246,10 +249,10 @@ function calculate() {
   // Output Rendering
   outShares.textContent = formatNumber(shares);
   const symbolStr = activeSymbol ? ` von ${activeSymbol}` : '';
-  outSharesSub.textContent = `Kaufe ${shares} Anteile${symbolStr} zu je ${formatCurrency(entry)}`;
-  outPosition.textContent = formatCurrency(positionVolume);
-  outMaxRisk.textContent = formatCurrency(maxRiskVal);
-  outRiskPerShare.textContent = formatCurrency(riskPerShare);
+  outSharesSub.textContent = `Kaufe ${shares} Anteile${symbolStr} zu je ${formatNumber(entry, 2)}`;
+  outPosition.textContent = formatNumber(positionVolume, 2);
+  outMaxRisk.textContent = formatNumber(maxRiskVal, 2);
+  outRiskPerShare.textContent = formatNumber(riskPerShare, 2);
   outPortfolioShare.textContent = `${formatNumber(portfolioShare, 1)}%`;
 
   // Risk-Reward-Ratio (CRV)
@@ -274,6 +277,12 @@ function calculate() {
   } else {
     tileCrvContainer.style.display = 'none';
   }
+
+  // Populate IBKR Helper Panel
+  ibkrQty.textContent = formatNumber(shares);
+  ibkrStopPrice.textContent = formatNumber(entry, 2);
+  ibkrSlPrice.textContent = formatNumber(stop, 2);
+  ibkrHelperCard.style.display = 'flex';
 }
 
 function resetOutputs() {
@@ -284,6 +293,9 @@ function resetOutputs() {
   outRiskPerShare.textContent = '—';
   outPortfolioShare.textContent = '—';
   tileCrvContainer.style.display = 'none';
+  
+  // Hide IBKR helper
+  ibkrHelperCard.style.display = 'none';
 }
 
 function showError(msg) {

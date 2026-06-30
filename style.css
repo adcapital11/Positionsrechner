@@ -51,7 +51,7 @@ body {
 /* Container & Layout */
 .app-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1250px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -192,7 +192,7 @@ label {
 
 input {
   width: 100%;
-  padding: 14px 16px 14px 40px;
+  padding: 14px 16px;
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--card-border);
   border-radius: var(--border-radius-md);
@@ -251,7 +251,7 @@ input[type=number] {
 /* Main Grid Layout */
 .app-main {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 24px;
 }
 
@@ -441,6 +441,87 @@ input[type=number] {
   vertical-align: middle;
   letter-spacing: 0.05em;
   box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
+}
+
+/* IBKR Card styles */
+.ibkr-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ibkr-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ibkr-row:last-child {
+  border-bottom: none;
+}
+
+.ibkr-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.ibkr-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ibkr-value.highlight {
+  color: var(--accent-color);
+}
+
+.ibkr-value.highlight-danger {
+  color: var(--danger-color);
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-success {
+  color: var(--success-color) !important;
+}
+
+/* Tooltip styles */
+.tooltip-trigger {
+  position: relative;
+}
+
+.tooltip-trigger::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 130%;
+  right: 0;
+  transform: translateY(5px);
+  background: #161b26;
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  width: 280px;
+  line-height: 1.4;
+  white-space: normal;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+  text-align: left;
+}
+
+.tooltip-trigger:hover::after {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive adjustments */

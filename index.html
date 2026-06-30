@@ -44,9 +44,8 @@
           <h2 class="card-title">Parameter</h2>
           
           <div class="form-group">
-            <label for="input-depot">Depotwert (€)</label>
+            <label for="input-depot">Depotwert</label>
             <div class="input-wrapper">
-              <span class="input-icon">€</span>
               <input type="text" inputmode="decimal" id="input-depot" placeholder="z.B. 10.000" required>
             </div>
           </div>
@@ -60,24 +59,21 @@
               </div>
             </div>
             <div class="input-wrapper">
-              <span class="input-icon" id="risk-icon">%</span>
               <input type="text" inputmode="decimal" id="input-risk" placeholder="z.B. 1,0" required>
             </div>
           </div>
 
           <div class="form-grid">
             <div class="form-group">
-              <label for="input-entry">Einstiegspreis (€)</label>
+              <label for="input-entry">Einstiegspreis</label>
               <div class="input-wrapper">
-                <span class="input-icon">€</span>
                 <input type="text" inputmode="decimal" id="input-entry" placeholder="z.B. 120,00" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="input-stop">Stop-Loss (€)</label>
+              <label for="input-stop">Stop-Loss</label>
               <div class="input-wrapper">
-                <span class="input-icon">€</span>
                 <input type="text" inputmode="decimal" id="input-stop" placeholder="z.B. 114,00" required>
               </div>
             </div>
@@ -89,17 +85,15 @@
             <div class="advanced-content">
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="input-target">Take-Profit (€)</label>
+                  <label for="input-target">Take-Profit</label>
                   <div class="input-wrapper">
-                    <span class="input-icon">€</span>
                     <input type="text" inputmode="decimal" id="input-target" placeholder="z.B. 140,00">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="input-fees">Transaktionsgebühr (€)</label>
+                  <label for="input-fees">Transaktionsgebühr</label>
                   <div class="input-wrapper">
-                    <span class="input-icon">€</span>
                     <input type="text" inputmode="decimal" id="input-fees" placeholder="z.B. 5,00" value="0,00">
                   </div>
                 </div>
@@ -160,7 +154,50 @@
 
         </div>
       </section>
-    </main>
+      
+      <div class="card glass ibkr-card" id="ibkr-helper-card" style="display: none;">
+      <h2 class="card-title">IBKR Order-Eingabehilfe</h2>
+      
+      <div class="ibkr-grid">
+        <div class="ibkr-row">
+          <span class="ibkr-label">Menge</span>
+          <span class="ibkr-value highlight" id="ibkr-qty">—</span>
+        </div>
+        <div class="ibkr-row">
+          <span class="ibkr-label">Ordertyp</span>
+          <span class="ibkr-value tooltip-trigger" data-tooltip="Triggert den Kauf erst, wenn der Stop-Kurs (Pivot) erreicht wird. Das Limit verhindert, dass Sie bei extremen Kurssprüngen (Gaps/Slippage) zu teuer einkaufen.">Stopp-Limit</span>
+        </div>
+        <div class="ibkr-row">
+          <span class="ibkr-label">Stop-Kurs</span>
+          <span class="ibkr-value highlight" id="ibkr-stop-price">—</span>
+        </div>
+        <div class="ibkr-row">
+          <span class="ibkr-label">Gültigkeitsdauer</span>
+          <span class="ibkr-value">GTC</span>
+        </div>
+        <div class="ibkr-row">
+          <span class="ibkr-label">Gewinnmitnahme anhängen</span>
+          <span class="ibkr-value text-muted">Nein</span>
+        </div>
+        <div class="ibkr-row">
+          <span class="ibkr-label">Stop-Loss anhängen</span>
+          <span class="ibkr-value text-success">Ja</span>
+        </div>
+        <div class="ibkr-row">
+          <span class="ibkr-label">Stop-Loss-Stoppkurs (SL)</span>
+          <span class="ibkr-value highlight-danger" id="ibkr-sl-price">—</span>
+        </div>
+        <div class="ibkr-row">
+          <span class="ibkr-label">Stop-Loss-Typ</span>
+          <span class="ibkr-value">Stopp</span>
+        </div>
+        <div class="ibkr-row">
+          <span class="ibkr-label">Gültigkeitsdauer (SL)</span>
+          <span class="ibkr-value">GTC</span>
+        </div>
+      </div>
+    </div>
+  </main>
 
     <footer class="app-footer">
       <p>&copy; 2026 Positionsgrößenrechner. Lokal auf Ihrem Gerät gespeichert.</p>
